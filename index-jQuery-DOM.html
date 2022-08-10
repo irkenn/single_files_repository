@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App!</title>
+    <style>
+        div{
+            
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Movies App!</h1>
+    <div class="form-section">
+        <form class="form">
+            <div>Movie Title</div>
+            <input class="title" type="text" placeholder="Enter the title here"/>
+            <div>Rating</div>
+            <input class="rating" type="number" placeholder="Rating 0-10"/> 
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="append-section">
+        <ul class="list">
+
+        </ul>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+
+function retrieveValues(){
+    arr = [];
+    console.log()
+    if ($(".title").val().length > 2 ){
+        arr.push($(".title").val());
+    }
+    else {
+        alert("The tittle of the movie has to be at least 2 characters long");
+        return;
+    }
+    if( $(".rating").val() >= 0 && 
+        $(".rating").val() <= 10){
+            arr.push($(".rating").val());
+        } 
+    else{
+        alert("The value of the rating should be between 0 and 10");
+        return;
+    }
+    return arr;
+};
+
+function clearValues(){
+    $(".title").val("");
+    $(".rating").val("");
+}
+
+$("form").on("submit", function(e){
+    e.preventDefault();
+    $(".list").append(`<li>Movie: ${retrieveValues()[0]}, Rating: ${retrieveValues()[1]}<button class="remove">Remove</button></li>`);
+    clearValues();
+});
+
+$(".append-section").on("click", ".remove", function(){
+    $(this).parent().remove();
+});
+
+</script>
+
+</body>
+</html>
